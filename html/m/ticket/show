@@ -1,0 +1,61 @@
+<%args>
+$id => undef
+</%args>
+<%init>
+my $t = RT::Ticket->new($session{CurrentUser});
+$t->Load($id);
+</%init>
+<&| /m/_elements/wrapper &>
+
+
+    <&| /Widgets/TitleBox, title => loc('The Basics'),
+        class => 'ticket-info-basics',
+    &>
+        <& /Ticket/Elements/ShowBasics, Ticket => $t &>
+    </&>
+
+% if ($t->CustomFields->First) {
+    <&| /Widgets/TitleBox, title => loc('Custom Fields'),
+        title_href => RT->Config->Get('WebPath')."/Ticket/Modify.html?id=".$t->Id,
+        class => 'ticket-info-cfs',
+    &>
+        <& /Ticket/Elements/ShowCustomFields, Ticket => $t &>
+    </&>
+% }
+
+    <&| /Widgets/TitleBox, title => loc('People'),
+        class => 'ticket-info-people',
+    &>
+        <& /Ticket/Elements/ShowPeople, Ticket => $t &>
+    </&>
+
+    <& /Ticket/Elements/ShowAttachments, Ticket => $t &>
+
+    <& /Ticket/Elements/ShowRequestor, Ticket => $t &>
+
+% if ( RT->Config->Get('EnableReminders') ) {
+    <&|/Widgets/TitleBox, title => loc("Reminders"),
+        class => 'ticket-info-reminders',
+    &>
+        <table><tr><td>
+            <form action="<%RT->Config->Get('WebPath')%>/Ticket/Display.html" method="post">
+                <& /Ticket/Elements/Reminders, Ticket => $t, ShowCompleted => 0 &>
+                <div align="right"><input type="submit" class="button" value="<&|/l&>Save</&>" /></div>
+            </form>
+        </td></tr></table>
+    </&>
+% }
+
+    <&| /Widgets/TitleBox, title => loc("Dates"),
+        class => 'ticket-info-dates',
+    &>
+        <& /Ticket/Elements/ShowDates, Ticket => $t &>
+    </&>
+
+    <&| /Widgets/TitleBox, title => loc('Links'),
+        class => 'ticket-info-links',
+    &>
+        <& /Elements/ShowLinks, Ticket => $t &>
+    </&>
+
+</&>

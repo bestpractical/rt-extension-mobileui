@@ -1,0 +1,30 @@
+<ul class="menu">
+% for my $item (@menu) {
+<li><a href="<%$item->{url}%>"><%$item->{label}%></li>
+% }
+</ul>
+<%init>
+my @menu = ( 
+{ label =>  loc("My tickets"),
+  url => '/m/tickets/owned'
+},
+ {
+    label => loc("My requests"),
+    url => '/m/tickets/requested'
+    },
+ {
+    label => loc("All tickets"),
+    url => '/m/tickets/all'
+    },
+{
+    label => loc("New ticket"),
+    url => '/m/ticket/create',
+},
+{
+    label => loc("Logout"),
+    url => '/m/logout',
+}
+
+
+);
+</%init>

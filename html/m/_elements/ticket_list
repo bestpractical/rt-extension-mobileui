@@ -1,0 +1,18 @@
+<%args>
+$query => ''
+$page => ''
+</%args>
+<%init>
+</%init>
+<&| /m/_elements/wrapper &>
+<& /Elements/CollectionList,
+    Query => $query,
+    OrderBy => 'id',
+    Order => 'desc',
+    Rows => '25',
+    Page => $page,
+    Format => q{'<a href="__WebPath__/m/ticket/show?id=__id__">__id__</a>','<a href="__WebPath__/m/ticket/show?id=__id__">Subject</a>',Status,Requestors,Owner,Priority},
+    Class => 'RT::Tickets',
+    BaseURL => '/m/list/'
+&>
+</&>

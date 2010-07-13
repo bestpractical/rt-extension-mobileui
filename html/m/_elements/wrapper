@@ -1,0 +1,6 @@
+<%init>
+$m->comp('header');
+$m->out($m->content);
+$m->comp('footer');
+$m->abort();
+</%init>
