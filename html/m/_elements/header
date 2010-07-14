@@ -1,2 +1,5 @@
 <html>
+<head>
+<link rel="stylesheet" type="text/css" href="<%RT->Config->Get('WebPath')|n%>/m/style.css"/>
+</head>
 <body>

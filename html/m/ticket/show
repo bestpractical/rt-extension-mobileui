@@ -2,8 +2,100 @@
 $id => undef
 </%args>
 <%init>
-my $t = RT::Ticket->new($session{CurrentUser});
-$t->Load($id);
+my $TicketObj;
+my @Actions; 
+
+if ($ARGS{'id'} eq 'new') {
+    # {{{ Create a new ticket
+
+    my $Queue = new RT::Queue( $session{'CurrentUser'} );
+    $Queue->Load($ARGS{'Queue'});
+    unless ( $Queue->id ) {
+        Abort('Queue not found');
+    }
+
+    unless ( $Queue->CurrentUserHasRight('CreateTicket') ) {
+        Abort('You have no permission to create tickets in that queue.');
+    }
+
+    ($TicketObj, @Actions) = CreateTicket(
+        Attachments => delete $session{'Attachments'},
+        %ARGS,
+    );
+    unless ( $TicketObj->CurrentUserHasRight('ShowTicket') ) {
+        Abort("No permission to view newly created ticket #".$TicketObj->id.".");
+    }
+    # }}}
+} else { 
+    $TicketObj ||= LoadTicket($ARGS{'id'});
+
+    $m->callback( CallbackName => 'BeforeProcessArguments',
+        TicketObj => $TicketObj,
+        ActionsRef => \@Actions, ARGSRef => \%ARGS );
+    if ( defined $ARGS{'Action'} ) {
+        if ($ARGS{'Action'} =~ /^(Steal|Kill|Take|SetTold)$/) {
+            my $action = $1;
+            my ($res, $msg) = $TicketObj->$action();
+            push(@Actions, $msg);
+        }
+    }
+
+    $m->callback(CallbackName => 'ProcessArguments', 
+            Ticket => $TicketObj, 
+            ARGSRef => \%ARGS, 
+            Actions => \@Actions);
+    
+    $ARGS{UpdateAttachments} = $session{'Attachments'};
+    push @Actions,
+        ProcessUpdateMessage(
+        ARGSRef   => \%ARGS,
+        Actions   => \@Actions,
+        TicketObj => $TicketObj,
+        );
+    delete $session{'Attachments'};
+
+    #Process status updates
+    push @Actions, ProcessTicketWatchers(ARGSRef => \%ARGS, TicketObj => $TicketObj );
+    push @Actions, ProcessTicketBasics(  ARGSRef => \%ARGS, TicketObj => $TicketObj );
+    push @Actions, ProcessTicketLinks(   ARGSRef => \%ARGS, TicketObj => $TicketObj );
+    push @Actions, ProcessTicketDates(   ARGSRef => \%ARGS, TicketObj => $TicketObj );
+    push @Actions, ProcessObjectCustomFieldUpdates(ARGSRef => \%ARGS, TicketObj => $TicketObj );
+
+    # XXX: we shouldn't block actions here if user has no right to see the ticket,
+    # but we should allow him to see actions he has done
+    unless ($TicketObj->CurrentUserHasRight('ShowTicket')) {
+        Abort("No permission to view ticket");
+    }
+    if ( $ARGS{'MarkAsSeen'} ) {
+        $TicketObj->SetAttribute(
+            Name => 'User-'. $TicketObj->CurrentUser->id .'-SeenUpTo',
+            Content => $TicketObj->LastUpdated,
+        );
+        push @Actions, loc('Marked all messages as seen');
+    }
+}
+
+$m->callback(
+    CallbackName => 'BeforeDisplay',
+    TicketObj => \$TicketObj,
+    Actions => \@Actions,
+    ARGSRef => \%ARGS,
+);
+
+# This code does automatic redirection if any updates happen. 
+
+if (@Actions) {
+
+    # We've done something, so we need to clear the decks to avoid
+    # resubmission on refresh.
+    # But we need to store Actions somewhere too, so we don't lose them.
+    my $key = Digest::MD5::md5_hex( rand(1024) );
+    push @{ $session{"Actions"}->{$key} ||= [] }, @Actions;
+    $session{'i'}++;
+    my $url = RT->Config->Get('WebURL') . "/m/ticket/show?id=" . $TicketObj->id . "&results=" . $key;
+    $url .= '#' . $ARGS{Anchor} if $ARGS{Anchor};
+    RT::Interface::Web::Redirect($url);
+}
 </%init>
 <&| /m/_elements/wrapper &>
 
@@ -11,27 +103,27 @@ $t->Load($id);
     <&| /Widgets/TitleBox, title => loc('The Basics'),
         class => 'ticket-info-basics',
     &>
-        <& /Ticket/Elements/ShowBasics, Ticket => $t &>
+        <& /Ticket/Elements/ShowBasics, Ticket => $TicketObj &>
     </&>
 
-% if ($t->CustomFields->First) {
+% if ($TicketObj->CustomFields->First) {
     <&| /Widgets/TitleBox, title => loc('Custom Fields'),
-        title_href => RT->Config->Get('WebPath')."/Ticket/Modify.html?id=".$t->Id,
+        title_href => RT->Config->Get('WebPath')."/Ticket/Modify.html?id=".$TicketObj->Id,
         class => 'ticket-info-cfs',
     &>
-        <& /Ticket/Elements/ShowCustomFields, Ticket => $t &>
+        <& /Ticket/Elements/ShowCustomFields, Ticket => $TicketObj &>
     </&>
 % }
 
     <&| /Widgets/TitleBox, title => loc('People'),
         class => 'ticket-info-people',
     &>
-        <& /Ticket/Elements/ShowPeople, Ticket => $t &>
+        <& /Ticket/Elements/ShowPeople, Ticket => $TicketObj &>
     </&>
 
-    <& /Ticket/Elements/ShowAttachments, Ticket => $t &>
+    <& /Ticket/Elements/ShowAttachments, Ticket => $TicketObj &>
 
-    <& /Ticket/Elements/ShowRequestor, Ticket => $t &>
+    <& /Ticket/Elements/ShowRequestor, Ticket => $TicketObj &>
 
 % if ( RT->Config->Get('EnableReminders') ) {
     <&|/Widgets/TitleBox, title => loc("Reminders"),
@@ -39,7 +131,7 @@ $t->Load($id);
     &>
         <table><tr><td>
             <form action="<%RT->Config->Get('WebPath')%>/Ticket/Display.html" method="post">
-                <& /Ticket/Elements/Reminders, Ticket => $t, ShowCompleted => 0 &>
+                <& /Ticket/Elements/Reminders, Ticket => $TicketObj, ShowCompleted => 0 &>
                 <div align="right"><input type="submit" class="button" value="<&|/l&>Save</&>" /></div>
             </form>
         </td></tr></table>
@@ -49,13 +141,13 @@ $t->Load($id);
     <&| /Widgets/TitleBox, title => loc("Dates"),
         class => 'ticket-info-dates',
     &>
-        <& /Ticket/Elements/ShowDates, Ticket => $t &>
+        <& /Ticket/Elements/ShowDates, Ticket => $TicketObj &>
     </&>
 
     <&| /Widgets/TitleBox, title => loc('Links'),
         class => 'ticket-info-links',
     &>
-        <& /Elements/ShowLinks, Ticket => $t &>
+        <& /Elements/ShowLinks, Ticket => $TicketObj &>
     </&>
 
 </&>

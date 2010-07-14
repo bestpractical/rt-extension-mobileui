@@ -5,6 +5,7 @@ $page => ''
 <%init>
 </%init>
 <&| /m/_elements/wrapper &>
+<&|/Widgets/TitleBox &>
 <& /Elements/CollectionList,
     Query => $query,
     OrderBy => 'id',
@@ -15,4 +16,5 @@ $page => ''
     Class => 'RT::Tickets',
     BaseURL => '/m/list/'
 &>
+</&>
 </&>

@@ -1,8 +1,10 @@
+<&| /Widgets/TitleBox &>
 <ul class="menu">
 % for my $item (@menu) {
 <li><a href="<%$item->{url}%>"><%$item->{label}%></li>
 % }
 </ul>
+</&>
 <%init>
 my @menu = ( 
 { label =>  loc("My tickets"),

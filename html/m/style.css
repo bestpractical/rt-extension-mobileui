@@ -1,0 +1,79 @@
+body {
+    font-family: helvetica, arial, sans-serif;
+    background-color: #ccf;
+    text-rendering: optimizeLegibility;
+}
+
+.titlebox-title {
+    font-size: 1.3em;
+    padding-top: 1em;
+    text-decoration: underline;
+}
+
+ul.menu
+{
+    text-align: left;
+    list-style: none;
+    padding: 0;
+    margin: -0.6em;
+    left: 0;
+}
+
+ul.menu li
+{
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+ul.menu li a:active, ul.menu li a:hover {
+    background-color: #eee;
+}
+
+
+ul.menu li a
+{
+    display: block;
+    padding: 1em;
+    margin: 0;
+    border:0;
+    border-top-width: 1px;
+    border-top-color: #666;
+    border-style: solid;
+    text-decoration: none;
+}
+
+ul.menu li:first-child a {
+    border: none;
+}
+
+ul.menu li#active a
+{
+    color: #800000;
+}
+
+div.titlebox {
+    padding: 1em;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+    margin: 1em;
+    background-color: #fff;
+
+}
+
+hr.clear {
+    display: none;
+}
+
+
+.label, .labeltop {
+    text-align: right;
+    display: inline-block;
+    width: 6em;
+}
+
+%$m->abort();
+</%init>
+    $HTML::Mason::Commands::r->content_type('text/css');
+
+</%init>
