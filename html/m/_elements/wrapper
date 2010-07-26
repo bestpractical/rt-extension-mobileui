@@ -1,5 +1,5 @@
 <%init>
-$m->comp('header');
+$m->comp('header', title => $ARGS{'title'});
 $m->out($m->content);
 $m->comp('footer');
 $m->abort();

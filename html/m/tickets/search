@@ -1,0 +1,4 @@
+<%init>
+ $m->comp('../_elements/ticket_list', query => $ARGS{'query'}, page => $ARGS{'page'});
+$m->abort();
+</%init>

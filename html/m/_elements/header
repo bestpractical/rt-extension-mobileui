@@ -1,5 +1,12 @@
+<%args>
+$title => undef
+</%args>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="<%RT->Config->Get('WebPath')|n%>/m/style.css"/>
+<title><%$title%></title>
 </head>
 <body>
+% if ($title) {
+<h1><%$title%></h1>
+% }

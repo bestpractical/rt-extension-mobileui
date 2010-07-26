@@ -1,5 +1,5 @@
 <%init>
 if (($ENV{'HTTP_USER_AGENT'} || '') !~ /(?:hiptop|Blazer|Novarra|Vagabond|SonyEricsson|Symbian|NetFront|UP.Browser|UP.Link|Windows CE|MIDP|J2ME|DoCoMo|J-PHONE|PalmOS|PalmSource|iPhone|iPod|AvantGo|Nokia|Android)/io && !$session{'NotMobile'})  {
-    RT::Interface::Web::Redirect('/m');
+    RT::Interface::Web::Redirect(RT->Config->Get('WebURL') ."/m")
 }
 </%init>

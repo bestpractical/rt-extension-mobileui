@@ -1,7 +1,7 @@
 <&| /Widgets/TitleBox &>
 <ul class="menu">
 % for my $item (@menu) {
-<li><a href="<%$item->{url}%>"><%$item->{label}%></li>
+<li><a href="<%RT->Config->Get('WebPath')%><%$item->{url}%>"><%$item->{label}%></a></li>
 % }
 </ul>
 </&>

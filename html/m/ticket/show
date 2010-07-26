@@ -99,6 +99,7 @@ if (@Actions) {
 </%init>
 <&| /m/_elements/wrapper &>
 
+<& /m/_elements/ticket_menu, ticket => $TicketObj &>
 
     <&| /Widgets/TitleBox, title => loc('The Basics'),
         class => 'ticket-info-basics',

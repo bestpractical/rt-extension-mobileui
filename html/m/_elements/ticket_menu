@@ -1,0 +1,36 @@
+<%args>
+$ticket
+</%args>
+<div class="ticket_menu">
+<&| /Widgets/TitleBox &>
+<ul>
+% for my $item (@menu) {
+<li style="width: <%$width%>%;"><a href="<%RT->Config->Get('WebPath')%><%$item->{url}%>"><%$item->{label}%></a></li>
+% }
+</ul>
+</&>
+</div>
+<%init>
+my @menu = ( 
+{ label =>  loc("Ticket"),
+  url => '/m/ticket/show?id='.$ticket->id
+},
+ {
+    label => loc("History"),
+  url => '/m/ticket/history?id='.$ticket->id
+    },
+ {
+    label => loc("Modify"),
+    url => '/m/ticket/modify?id='.$ticket->id
+    },
+{
+    label => loc("Reply"),
+    url => '/m/ticket/reply?id='.$ticket->id
+}
+
+
+); 
+
+my $width = int(100/ ($#menu +1))-1;
+
+</%init>
