@@ -1,5 +1,8 @@
+<%args>
+$title => ''
+</%args>
 <%init>
-$m->comp('header', title => $ARGS{'title'});
+$m->comp('header', title => $title);
 $m->out($m->content);
 $m->comp('footer');
 $m->abort();
