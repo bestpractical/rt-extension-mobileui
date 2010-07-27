@@ -17,9 +17,11 @@ my $history = $t->Transactions()->ItemsArrayRef;
 <& /Elements/ShowUser, User => $entry->CreatorObj &> - 
 <%$entry->BriefDescription%>
 % if ($entry->Type !~ /EmailRecord/) {
+% if ($entry->ContentObj) {
 <div class="txn-content">
 <%$entry->Content%>
 </div>
+%}
 % }
 </li>
 % }

@@ -274,3 +274,32 @@ form {
     font-size: 1.2em;
     color: #000;
 }
+
+div.txn-content {
+    
+    font-size:0.8em;
+    padding-left:1em;
+    padding-top:0.5em;
+    padding-bottom: 0.5em;
+    border-left: 5px solid #00c;
+
+}
+
+form span.label {
+    text-align: left;
+    font-size: 0.8em;
+}
+
+div.entry {
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid black;
+}
+
+div.entry input[type=text] {
+    width: 100%;
+}
+
+div.entry textarea {
+    width: 100%;
+}

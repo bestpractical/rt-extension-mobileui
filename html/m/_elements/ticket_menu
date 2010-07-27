@@ -19,10 +19,7 @@ my @menu = (
     label => loc("History"),
   url => '/m/ticket/history?id='.$ticket->id
     },
- {
-    label => loc("Modify"),
-    url => '/m/ticket/modify?id='.$ticket->id
-    },
+ #{ label => loc("Modify"), url => '/m/ticket/modify?id='.$ticket->id },
 {
     label => loc("Reply"),
     url => '/m/ticket/reply?id='.$ticket->id
