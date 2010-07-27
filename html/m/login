@@ -26,8 +26,10 @@ unless (!defined($uri->authority) || $uri->authority eq $uri_base_url->authority
 }
 </%INIT>
 <&| /m/_elements/wrapper &>
-
-
+<style>
+<& /m/_elements/raw_style &>
+</style>
+<h1><&|/l, RT->Config->Get('rtname') &>RT for [_1]</&></h1>
 <div id="body" class="login-body">
 % if ($Error) {
 <&| "/Widgets/TitleBox", title => loc('Error'), hideable => 0, class => 'error'  &>
@@ -37,7 +39,7 @@ unless (!defined($uri->authority) || $uri->authority eq $uri_base_url->authority
 
 
 <div id="login-box">
-<&| /Widgets/TitleBox, title => loc('Login'), titleright => $RT::VERSION, hideable => 0 &>
+<&| /Widgets/TitleBox, title => loc('Login'), hideable => 0 &>
 
 % unless (RT->Config->Get('WebExternalAuth') and !RT->Config->Get('WebFallbackToInternalAuth')) {
 <form id="login" name="login" method="post" action="<% $form_action %>">
@@ -52,9 +54,7 @@ unless (!defined($uri->authority) || $uri->authority eq $uri_base_url->authority
     <span class="input"><input type="password" name="pass" autocomplete="off" /></span>
 </div>
 
-<div class="button-row">
-    <span class="input"><input type="submit" class="button" value="<&|/l&>Login</&>" /></span>
-</div>
+<& /Elements/Submit, Label => loc('Login')&>
 
 % foreach my $key (keys %ARGS) {
 %  if (($key ne 'user') and ($key ne 'pass')) {

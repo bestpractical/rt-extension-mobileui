@@ -1,4 +1,4 @@
-<&| /Widgets/TitleBox &>
+<&| /Widgets/TitleBox, class => 'menu'&>
 <ul class="menu">
 % for my $item (@menu) {
 <li><a href="<%RT->Config->Get('WebPath')%><%$item->{url}%>"><%$item->{label}%></a></li>

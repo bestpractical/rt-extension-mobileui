@@ -17,7 +17,7 @@ if ($page > 1 && ! @{$collection->ItemsArrayRef||[]}) {
 </%init>
 <&| /m/_elements/wrapper, title => 
 loc("Found [quant,_1,ticket]",$collection->Count) &>
-<&|/Widgets/TitleBox, 
+<&|/Widgets/TitleBox, class => 'search'
 &>
 <ul class="ticketlist">
 % while (my $ticket = $collection->Next()) {
