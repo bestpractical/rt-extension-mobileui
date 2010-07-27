@@ -171,7 +171,7 @@ div#paging {
     color: #000;
 }
 
-.menu a:after {
+ul.menu a:after {
     color: #666;
     content: " >";
 }
@@ -255,4 +255,22 @@ input[type=submit], input[type=button], button, #paging a {
 form { 
 
     margin:0;
+}
+
+#gohome {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    -moz-border-radius-bottomleft: 1em;
+    -webkit-border-bottom-left-radius: 1em;
+
+    padding: 0.5em;
+    background-color: #fff;
+}
+
+#gohome a {
+    font-size: 1.2em;
+    color: #000;
 }

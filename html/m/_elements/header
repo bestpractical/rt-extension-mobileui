@@ -10,3 +10,6 @@ $title => undef
 % if ($title) {
 <h1><%$title%></h1>
 % }
+<div id="gohome">
+<a href="<%RT->Config->Get('WebPath')%>/m/"><&|/l&>Homepage</&>
+</div>
