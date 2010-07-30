@@ -28,9 +28,10 @@ div.buttons {
     margin-top: -1.2em;
     top: -0.5em;
     padding: 0.5em;
+    padding-right: 0;
     position: relative;
     display: inline-block;
-    text-decoration: underline;
+    text-decoration: none;
     background-color: #fff;
     -moz-border-radius: 0.25em;
     -webkit-border-radius: 0.25em;
@@ -54,6 +55,7 @@ ul.menu li
     display: block;
     margin: 0;
     padding: 0;
+    font-weight: bold;
 }
 
 ul.ticketlist li:active, ul.ticketlist li:hover,
@@ -108,13 +110,11 @@ hr.clear {
 
 
 .label, .labeltop {
-    text-align: right;
-    display: inline-block;
-    width: 8em;
     font-weight: normal;
 }
 .value { 
     font-weight: bold;
+    width: 100%;
 }
 
 ul.ticketlist {
@@ -130,11 +130,11 @@ ul.ticketlist {
 ul.ticketlist li.ticket {
     padding: 0.5em;
     font-weight: bold;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #999;
     
 }
 ul.ticketlist li.ticket:first-child {
-    border-top: 1px solid black;
+    border-top: 1px solid #999;
 }
 
 ul.ticketlist li.ticket a.ticket{
@@ -143,10 +143,6 @@ ul.ticketlist li.ticket a.ticket{
 
 ul.ticketlist li.ticket div {
     padding: 0.2em;
-}
-
-ul.ticketlist li.ticket .label{
-    font-weight: normal;
 }
 
 
@@ -208,13 +204,8 @@ ul.menu a:after {
     padding: 0.5em;
 }
 
-div#login-box div.titlebox .label {
-    width: 5em;
-}
-
 div#login-box div.titlebox {
-    width: 21em;
-    text-align: center;
+    width: 100%;
     margin-left:auto;
     margin-right: auto;
 }
@@ -285,9 +276,12 @@ div.txn-content {
 
 }
 
-form span.label {
+.label {
     text-align: left;
     font-size: 0.8em;
+    clear:both;
+    display: block;
+    
 }
 
 div.entry {
@@ -296,10 +290,10 @@ div.entry {
     border-bottom: 1px solid black;
 }
 
-div.entry input[type=text] {
+input, input[type=text], input[type=password] {
     width: 100%;
 }
 
-div.entry textarea {
+textarea {
     width: 100%;
 }

@@ -6,27 +6,44 @@
 </ul>
 </&>
 <%init>
-my @menu = ( 
-{ label =>  loc("My tickets"),
-  url => '/m/tickets/owned'
-},
- {
-    label => loc("My requests"),
-    url => '/m/tickets/requested'
+use RT::SavedSearches;
+my @menu = (
+    {   label => loc("New ticket"),
+        url   => '/m/ticket/create',
     },
- {
-    label => loc("All tickets"),
-    url => '/m/tickets/all'
+    {   label => loc("My tickets"),
+        url   => '/m/tickets/owned'
     },
-{
-    label => loc("New ticket"),
-    url => '/m/ticket/create',
-},
-{
-    label => loc("Logout"),
-    url => '/m/logout',
-}
-
+    {   label => loc("My requests"),
+        url   => '/m/tickets/requested'
+    },
+    {   label => loc("All tickets"),
+        url   => '/m/tickets/all'
+    },
 
 );
+
+
+if ( $session{'CurrentUser'}->HasRight( Right  => 'LoadSavedSearch', Object => $RT::System))
+    {
+
+        my @Objects = RT::SavedSearches->new( $session{CurrentUser} )->_PrivacyObjects;
+        push @Objects, RT::System->new( $session{'CurrentUser'} )
+            if $session{'CurrentUser'}->HasRight(
+            Object => $RT::System,
+            Right  => 'SuperUser'
+            );
+
+        foreach my $object (@Objects) {
+            my @searches = $object->Attributes->Named('SavedSearch');
+            foreach my $search (@searches) {
+                warn $search->SubValue("SearchType") ." is the type";
+                next unless $search->SubValue("SearchType") eq 'Ticket';
+                warn YAML::Dump($search->Content); use YAML;
+                push @menu, { label => $search->Description, url => '/m/tickets/search?q=' . $search->SubValue("Query") };
+
+            }
+        }
+}
+push @menu,  {   label => loc("Logout"), url   => '/m/logout', } ;
 </%init>

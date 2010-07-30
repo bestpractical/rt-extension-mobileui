@@ -5,11 +5,12 @@ $title => undef
 <head>
 <link rel="stylesheet" type="text/css" href="<%RT->Config->Get('WebPath')|n%>/m/style.css"/>
 <title><%$title%></title>
+<meta name="viewport" content="width=device-width height=device-height user-scalable=yes"/>
 </head>
 <body>
 % if ($title) {
 <h1><%$title%></h1>
 % }
 <div id="gohome">
-<a href="<%RT->Config->Get('WebPath')%>/m/"><&|/l&>Homepage</&>
+<a href="<%RT->Config->Get('WebPath')%>/m/"><&|/l&>Homepage</&></a>
 </div>
