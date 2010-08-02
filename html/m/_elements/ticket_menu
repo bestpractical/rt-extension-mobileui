@@ -2,17 +2,15 @@
 $ticket
 </%args>
 <div class="ticket_menu">
-<&| /Widgets/TitleBox &>
 <ul>
 % for my $item (@menu) {
-<li style="width: <%$width%>%;"><a href="<%RT->Config->Get('WebPath')%><%$item->{url}%>"><%$item->{label}%></a></li>
+<li><a href="<%RT->Config->Get('WebPath')%><%$item->{url}%>"><%$item->{label}%></a></li>
 % }
 </ul>
-</&>
 </div>
 <%init>
 my @menu = ( 
-{ label =>  loc("Ticket"),
+{ label =>  loc("Basics"),
   url => '/m/ticket/show?id='.$ticket->id
 },
  {
@@ -28,6 +26,6 @@ my @menu = (
 
 ); 
 
-my $width = int(100/ ($#menu +1))-1;
+my $width = int(100/ ($#menu +1))-5;
 
 </%init>

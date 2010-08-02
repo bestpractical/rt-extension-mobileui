@@ -1,17 +1,14 @@
 body {
     font-family: helvetica, arial, sans-serif;
     background-color: #ccf;
-    text-rendering: optimizeLegibility;
     margin: 0;
 }
 
 h1 { 
     font-size: 1.5em;
     padding-top: 0.5em;
-    padding-bottom: 0.25em;
-    margin-bottom: 1.5em;
     padding-left: 0.2em;
-    
+    display: block; 
     background-color: #fff;
 
 }
@@ -28,7 +25,6 @@ div.buttons {
     margin-top: -1.2em;
     top: -0.5em;
     padding: 0.5em;
-    padding-right: 0;
     position: relative;
     display: inline-block;
     text-decoration: none;
@@ -38,7 +34,6 @@ div.buttons {
     -webkit-box-shadow: #333 0px 0px 5px;
     -moz-box-shadow: #333 0px 0px 5px;
     box-shadow: #333 0px 0px 5px;
-
 }
 
 ul.menu
@@ -64,7 +59,7 @@ ul.menu li:active, ul.menu li:hover {
 }
 
 
-ul.menu li a
+ul.menu li
 {
     display: block;
     padding: 1em;
@@ -76,7 +71,7 @@ ul.menu li a
     text-decoration: none;
 }
 
-ul.menu li:first-child a {
+ul.menu li:first-child{
     border: none;
 }
 
@@ -85,7 +80,7 @@ ul.menu li#active a
     color: #800000;
 }
 
-div.titlebox, #bpscredits{
+div.titlebox, #bpscredits, .ticket_menu{
     -moz-border-radius: 1em;
     -webkit-border-radius: 1em;
     margin: 0.5em;
@@ -158,7 +153,7 @@ div#paging {
     text-align: center;
 }
 
-.titlebox.search .titlebox-title, .titlebox.menu .titlebox-title, .ticket_menu .titlebox-title, .history .titlebox-title{
+.titlebox.search .titlebox-title, .titlebox.menu .titlebox-title, .ticket_menu .titlebox-title, .history .titlebox-title, #ticket-create-basics .titlebox-title{
     display: none;
 }
 
@@ -172,20 +167,55 @@ ul.menu a:after {
     content: " >";
 }
 
+ul.menu form {
+    display: inline;
+}
+
+ul.menu form * {
+    width: 8em;
+    display: inline;
+}
+
+ul.menu form input {
+    padding: 0;
+    margin: 0;
+}
+
+ul.menu form input{ 
+
+    width: auto;
+    padding: 0.5em;
+    margin: -0.5em;
+    margin-left: 1em;
+}
+
+.ticket_menu {
+    text-align: center;
+}
+
+.ticket_menu ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
 .ticket_menu ul li {
+
     display: inline-block;
-    list-style: none;
     text-align: center;
     padding-bottom: 0.25em;
     padding-top: 0.25em;
     font-size: 1.5em;
+    width: 28%;
+    padding-right: 0.3em;
+    padding-left: 0.2em;
+    border-right: 1px solid #000;
 }
-.ticket_menu ul {
-    width: 100%;
-    display: block;
-    padding: 0;
-    margin: 0;
+.ticket_menu ul li:last-child {
+    padding-right: 0;
+    border-right: 0; 
 }
+
 
 .history ul.history-list {
     padding: 0;
@@ -281,17 +311,25 @@ div.txn-content {
     font-size: 0.8em;
     clear:both;
     display: block;
+    padding-bottom: 0.2em;
     
 }
 
 div.entry {
     margin-bottom: 1em;
     padding-bottom: 1em;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #ccc;
+    display: block;
+    width: 100%;
+    min-height: 2em;
 }
 
 input, input[type=text], input[type=password] {
     width: 100%;
+}
+
+.timefield input {
+    width: 5em;
 }
 
 textarea {

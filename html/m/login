@@ -1,13 +1,15 @@
 <%INIT>
 my $req_uri;
 
-if (UNIVERSAL::can($r, 'uri') and $r->uri =~ m{.*/(.*)}) {
-    $req_uri = $1;
+if (UNIVERSAL::can($r, 'uri') and $r->uri =~ m{.*/m/(.*)}) {
+    $req_uri = '/m/'.$1;
 }
+
+my $default_path = RT->Config->Get('WebPath') ."/m/";
 
 my $form_action = defined $goto             ? $goto
                 : defined $req_uri          ? $req_uri
-                :                             RT->Config->Get('WebPath')
+                :                             $default_path
                 ;
 
 # sanitize $form_action
@@ -15,17 +17,17 @@ my $uri = URI->new($form_action);
 
 # You get undef scheme with a relative uri like "/Search/Build.html"
 unless (!defined($uri->scheme) || $uri->scheme eq 'http' || $uri->scheme eq 'https') {
-    $form_action = RT->Config->Get('WebPath');
+    $form_action = $default_path;
 }
 
 # Make sure we're logging in to the same domain
 # You can get an undef authority with a relative uri like "index.html"
-my $uri_base_url = URI->new(RT->Config->Get('WebBaseURL'));
+my $uri_base_url = URI->new(RT->Config->Get('WebBaseURL')."/m/");
 unless (!defined($uri->authority) || $uri->authority eq $uri_base_url->authority) {
-    $form_action = RT->Config->Get('WebPath');
+    $form_action = $default_path;
 }
 </%INIT>
-<&| /m/_elements/wrapper &>
+<&| /m/_elements/wrapper, show_home_button => 0 &>
 <style>
 <& /m/_elements/raw_style &>
 </style>

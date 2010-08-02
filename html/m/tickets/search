@@ -1,4 +1,20 @@
+<%args>
+$page => 1
+</%args>
 <%init>
- $m->comp('../_elements/ticket_list', query => $ARGS{'query'}, page => $ARGS{'page'});
+use RT::Search::Googleish;
+my $query = $ARGS{'query'};
+if ($ARGS{'q'}) {
+    my $tickets = RT::Tickets->new( $session{'CurrentUser'} );
+    my %args = (
+        Argument   => $ARGS{q},
+        TicketsObj => $tickets,
+    );
+    my $search = RT::Search::Googleish->new(%args);
+    $query = $search->QueryToSQL();
+
+}
+
+$m->comp('../_elements/ticket_list', query => $query, page => $page);
 $m->abort();
 </%init>

@@ -1,15 +1,28 @@
 <&| /Widgets/TitleBox, class => 'menu'&>
 <ul class="menu">
 % for my $item (@menu) {
+% if (exists $item->{html}) {
+<li><%$item->{html} |n%></li>
+% } else {
 <li><a href="<%RT->Config->Get('WebPath')%><%$item->{url}%>"><%$item->{label}%></a></li>
+% }
 % }
 </ul>
 </&>
 <%init>
 use RT::SavedSearches;
 my @menu = (
+    {         html => '<form method="GET" id="search" action="'
+            . RT->Config->Get('WebPath')
+            . '/m/tickets/search">'
+            . loc("Search")
+            . ': <input type="text" name="q" id="q" value=""/>'
+            . '<input type="submit" value="'
+            . loc("Go")
+            . '"/></form>'
+    },
     {   label => loc("New ticket"),
-        url   => '/m/ticket/create',
+        url   => '/m/ticket/select_create_queue',
     },
     {   label => loc("My tickets"),
         url   => '/m/tickets/owned'
@@ -20,7 +33,6 @@ my @menu = (
     {   label => loc("All tickets"),
         url   => '/m/tickets/all'
     },
-
 );
 
 

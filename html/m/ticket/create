@@ -14,7 +14,7 @@ my $showrows = sub {
         my $key = shift @pairs;
         my $val = shift @pairs;
 
-        $m->out("<div><label>$key</label><div class=\"value\">$val</div></div>");
+        $m->out("<div class=\"entry\"><span class=\"label\">$key</span><div class=\"value\">$val</div></div>");
 
     }
 
@@ -101,7 +101,7 @@ if ($CloneTicket) {
 
 my @results;
 
-my $title = loc("Create a new ticket");
+my $title = loc("Create a ticket");
 
 my $QueueObj = new RT::Queue($session{'CurrentUser'});
 $QueueObj->Load($Queue) || Abort(loc("Queue could not be loaded."));
@@ -203,7 +203,7 @@ if ((!exists $ARGS{'AddMoreAttach'}) and (defined($ARGS{'id'}) and $ARGS{'id'} e
 
 
 </%init>
-<&| /m/_elements/wrapper &>
+<&| /m/_elements/wrapper, title => $title &>
 <& /Elements/ListActions, actions => \@results  &>
 <form action="<% RT->Config->Get('WebPath') %>/m/ticket/create" method="post" enctype="multipart/form-data" name="TicketCreate">
 <input type="hidden" class="hidden" name="id" value="new" />
@@ -211,8 +211,8 @@ if ((!exists $ARGS{'AddMoreAttach'}) and (defined($ARGS{'id'}) and $ARGS{'id'} e
 % if ($gnupg_widget) {
 <& /Elements/GnuPG/SignEncryptWidget:ShowIssues, self => $gnupg_widget &>
 % }
-<div id="Ticket-Create-basics">
-<&| /Widgets/TitleBox, title => $title &>
+<div id="ticket-create-basics">
+<&| /Widgets/TitleBox &>
 <%perl>
 
 $showrows->(
@@ -334,26 +334,26 @@ $showrows->(
         Default => $ARGS{FinalPriority} ? $ARGS{FinalPriority} : $QueueObj->FinalPriority,
     ),
 
-    loc("Time Estimated") => $m->scomp(
+    loc("Time Estimated") => '<span class="timefield">'.$m->scomp(
         "/Elements/EditTimeValue",
         Name    => 'TimeEstimated',
         Default => $ARGS{TimeEstimated} || '',
         InUnits => $ARGS{'TimeEstimated-TimeUnits'}
-        ),
+        ).'</span>',
 
-    loc("Time Worked") => $m->scomp(
+    loc("Time Worked") => '<span class="timefield">'.$m->scomp(
         "/Elements/EditTimeValue",
         Name    => 'TimeWorked',
         Default => $ARGS{TimeWorked} || '',
         InUnits => $ARGS{'TimeWorked-TimeUnits'}
-    ),
+    ). '</span>',
 
-    loc("Time Left") => $m->scomp(
+    loc("Time Left") => '<span class="timefield">'.$m->scomp(
         "/Elements/EditTimeValue",
         Name    => 'TimeLeft',
         Default => $ARGS{TimeLeft} || '',
         InUnits => $ARGS{'TimeLeft-TimeUnits'}
-    ),
+    ).'</span>',
 );
 
 </%perl>

@@ -1,8 +1,9 @@
 <%args>
 $title => ''
+$show_home_button => 1
 </%args>
 <%init>
-$m->comp('header', title => $title);
+$m->comp('header', title => $title, show_home_button => $show_home_button);
 $m->out($m->content);
 $m->comp('footer');
 $m->abort();

@@ -2,7 +2,7 @@
 <& /m/_elements/ticket_menu, ticket => $t &>
 <& /Elements/ListActions, actions => \@results &>
 
-<&|/Widgets/TitleBox, title => loc('Update ticket')&>
+<&|/Widgets/TitleBox, title => loc('Update ticket #[_1]', $t->id)&>
 <form action="reply" id="update"
     method="post" enctype="multipart/form-data">
 <input type="hidden" class="hidden" name="DefaultStatus" value="<% $DefaultStatus ||''%>" />
