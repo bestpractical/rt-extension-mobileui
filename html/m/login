@@ -1,4 +1,5 @@
 <%INIT>
+
 my $req_uri;
 
 if (UNIVERSAL::can($r, 'uri') and $r->uri =~ m{.*/m/(.*)}) {
@@ -73,6 +74,7 @@ unless (!defined($uri->authority) || $uri->authority eq $uri_base_url->authority
 </&>
 </div><!-- #login-box -->
 </div><!-- #login-body -->
+<& _elements/full_site_link &>
 </&>
 <%ARGS>
 $user => ""

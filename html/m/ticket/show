@@ -383,7 +383,7 @@ for my $link ( @{ $Ticket->DependsOn->ItemsArrayRef } ) {
 
 <ul>
 % for my $Link (@not_tickets, @active, @inactive) {
-<li><& ShowLink, URI => $Link &></li>
+<li><& /Elements/ShowLink, URI => $Link &></li>
 % }
 </ul>
     </div>
@@ -393,7 +393,7 @@ for my $link ( @{ $Ticket->DependsOn->ItemsArrayRef } ) {
     <div class="value">
 <ul>
 % while (my $Link = $Ticket->DependedOnBy->Next) {
-<li><& ShowLink, URI => $Link->BaseURI &></li>
+<li><& /Elements/ShowLink, URI => $Link->BaseURI &></li>
 % }
 </ul>
     </div>
@@ -411,7 +411,7 @@ for my $link ( @{ $Ticket->DependsOn->ItemsArrayRef } ) {
     <div class="value">
 <ul>
 % while (my $Link = $Ticket->RefersTo->Next) {
-<li><& ShowLink, URI => $Link->TargetURI &></li>
+<li><& /Elements/ShowLink, URI => $Link->TargetURI &></li>
 % }
 </ul>
     </div>
@@ -422,7 +422,7 @@ for my $link ( @{ $Ticket->DependsOn->ItemsArrayRef } ) {
     <ul>
 % while (my $Link = $Ticket->ReferredToBy->Next) {
 % next if (UNIVERSAL::isa($Link->BaseObj, 'RT::Ticket')  && $Link->BaseObj->Type eq 'reminder');
-<li><& ShowLink, URI => $Link->BaseURI &></li>
+<li><& /Elements/ShowLink, URI => $Link->BaseURI &></li>
 % }
 </ul>
     </div>

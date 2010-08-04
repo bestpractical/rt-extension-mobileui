@@ -211,14 +211,39 @@ if ((!exists $ARGS{'AddMoreAttach'}) and (defined($ARGS{'id'}) and $ARGS{'id'} e
 % if ($gnupg_widget) {
 <& /Elements/GnuPG/SignEncryptWidget:ShowIssues, self => $gnupg_widget &>
 % }
+
+
+<div id="ticket-create-simple">
+<&| /Widgets/TitleBox, title => $QueueObj->Name &>
+
+<%perl>
+$showrows->(
+    loc("Subject") => '<input name="Subject" size="30" maxsize="200" value="'.($ARGS{Subject} || '').'" />',
+    loc("Describe the issue below") =>
+        $m->scomp(
+        "/Elements/MessageBox", exists $ARGS{Content}  ? (Default => $ARGS{Content}, IncludeSignature => 0 ) : 
+( QuoteTransaction => $QuoteTransaction ),
+    Height => 5
+
+
+));
+
+
+$m->comp("/Elements/Submit", Label => loc("Create"));
+
+</%perl>
+
+</&>
+</div>
+
 <div id="ticket-create-basics">
 <&| /Widgets/TitleBox &>
+   <input type="hidden" class="hidden" name="Queue" value="<%$QueueObj->id %>" />
 <%perl>
 
 $showrows->(
 
-    loc('Queue') => $m->scomp( '/Ticket/Elements/ShowQueue', QueueObj => $QueueObj )
-        . '<input type="hidden" class="hidden" name="Queue" value="'. $QueueObj->Name .'" />',
+   # loc('Queue') => $m->scomp( '/Ticket/Elements/ShowQueue', QueueObj => $QueueObj ) ,
 
     loc('Status') =>
 
@@ -265,9 +290,6 @@ $showrows->(
         )
         . '</font></i></span>',
 
-    loc("Subject") =>
-
-        '<input name="Subject" size="60" maxsize="200" value="'.($ARGS{Subject} || '').'" />',
 
 );
 
@@ -305,17 +327,6 @@ $showrows->(
 %$m->scomp("/Elements/GnuPG/SignEncryptWidget", self => $gnupg_widget, QueueObj => $QueueObj )
 % }
 
-<%perl>
-$showrows->(
-    loc("Describe the issue below") =>
-        $m->scomp(
-        "/Elements/MessageBox", exists $ARGS{Content}  ? (Default => $ARGS{Content}, IncludeSignature => 0 ) : 
-( QuoteTransaction => $QuoteTransaction )));
-
-
-$m->scomp("/Elements/Submit", Label => loc("Create"));
-
-</%perl>
 
     <div class="ticket-info-basics">
 	  <&| /Widgets/TitleBox, title => loc('The Basics'), 

@@ -1,5 +1,5 @@
 <%init>
-if ((($ENV{'HTTP_USER_AGENT'} || '') =~ /(?:hiptop|Blazer|Novarra|Vagabond|SonyEricsson|Symbian|NetFront|UP.Browser|UP.Link|Windows CE|MIDP|J2ME|DoCoMo|J-PHONE|PalmOS|PalmSource|iPhone|iPod|AvantGo|Nokia|Android)/io && !$session{'NotMobile'})  || ($m->request_comp->path() =~ m{^/m(?:\/|$)})) {
+    if ( RT::Extension::MobileUI->MobileClient() || ($m->request_comp->path() =~ m{^/m(?:\/|$)})) {
 
     $m->comp('/m/login',%ARGS);
     $m->abort;

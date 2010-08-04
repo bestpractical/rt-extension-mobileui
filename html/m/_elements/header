@@ -2,6 +2,10 @@
 $title => undef
 $show_home_button => 1
 </%args>
+<%init>
+$r->headers_out->{'Pragma'} = 'no-cache';
+$r->headers_out->{'Cache-control'} = 'no-cache';
+</%init>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="<%RT->Config->Get('WebPath')|n%>/m/style.css"/>
@@ -9,11 +13,12 @@ $show_home_button => 1
 <meta name="viewport" content="width=device-width height=device-height user-scalable=yes"/>
 </head>
 <body>
-% if ($title) {
-<h1><%$title%></h1>
-% }
 % if ($show_home_button) {
-<div id="gohome">
+% # The align is for older browsers, like the blackberry
+<div id="gohome" align="right">
 <a href="<%RT->Config->Get('WebPath')%>/m/"><&|/l&>Homepage</&></a>
 </div>
+% }
+% if ($title) {
+<h1><%$title%></h1>
 % }

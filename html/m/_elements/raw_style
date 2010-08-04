@@ -225,12 +225,12 @@ ul.menu form input{
 
 
 .history ul.history-list li:first-child {
-    border-top: 1px solid black;
+    border-top: 1px solid #ccc;
 }
 
 .history ul.history-list li {
     list-style: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #ccc;
     padding: 0.5em;
 }
 
@@ -286,7 +286,6 @@ form {
     border-bottom: 1px solid black;
     -moz-border-radius-bottomleft: 1em;
     -webkit-border-bottom-left-radius: 1em;
-
     padding: 0.5em;
     background-color: #fff;
 }
@@ -324,7 +323,7 @@ div.entry {
     min-height: 2em;
 }
 
-input, input[type=text], input[type=password] {
+input, input[type=text], input[type=password], select {
     width: 100%;
 }
 
@@ -332,6 +331,15 @@ input, input[type=text], input[type=password] {
     width: 5em;
 }
 
+.timefield select {
+    width: auto;
+}
+
+
 textarea {
     width: 100%;
+}
+
+a#fullsite {
+    padding-left: 1em;
 }
