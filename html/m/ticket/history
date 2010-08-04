@@ -11,7 +11,7 @@ my $history = $t->Transactions()->ItemsArrayRef;
 <& /m/_elements/ticket_menu, ticket => $t &>
 <&|/Widgets/TitleBox &>
 <ul class="history-list">
-% for my $entry (@$history) {
+% for my $entry (reverse @$history) {
 <li>
 <% $entry->CreatedObj->AgeAsString() %> -
 <& /Elements/ShowUser, User => $entry->CreatorObj &> - 
