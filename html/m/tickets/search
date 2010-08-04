@@ -1,5 +1,7 @@
 <%args>
 $page => 1
+$order_by => 'id'
+$order => 'desc'
 </%args>
 <%init>
 use RT::Search::Googleish;
@@ -15,6 +17,6 @@ if ($ARGS{'q'}) {
 
 }
 
-$m->comp('../_elements/ticket_list', query => $query, page => $page);
+$m->comp('../_elements/ticket_list', query => $query, page => $page, order_by => $order_by, order => $order);
 $m->abort();
 </%init>

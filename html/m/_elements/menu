@@ -49,10 +49,8 @@ if ( $session{'CurrentUser'}->HasRight( Right  => 'LoadSavedSearch', Object => $
         foreach my $object (@Objects) {
             my @searches = $object->Attributes->Named('SavedSearch');
             foreach my $search (@searches) {
-                warn $search->SubValue("SearchType") ." is the type";
                 next unless $search->SubValue("SearchType") eq 'Ticket';
-                warn YAML::Dump($search->Content); use YAML;
-                push @menu, { label => $search->Description, url => '/m/tickets/search?q=' . $search->SubValue("Query") };
+                push @menu, { label => $search->Description, url => '/m/tickets/search?query=' . $search->SubValue("Query").'&order='.$search->SubValue("Order").'&order_by='.$search->SubValue("OrderBy") };
 
             }
         }

@@ -1,4 +1,6 @@
 <%args>
+$order => undef
+$order_by => undef
 $query => ''
 $page => 1
 </%args>
@@ -7,11 +9,23 @@ my $collection = RT::Tickets->new($session{'CurrentUser'});
 $collection->FromSQL($query);
 $collection->RowsPerPage(10);
 $collection->GotoPage($page-1);
-$collection->OrderBy( FIELD => 'id', ORDER => 'desc');
+# XXX: ->{'order_by'} is hacky, but there is no way to check if
+# collection is ordered or not
+if ( $order_by) {
+        my @order_by = split /\|/, $order_by;
+        my @order = split /\|/,$order;
+    $collection->OrderByCols(
+        map { { FIELD => $order_by[$_], ORDER => $order[$_] } }
+        ( 0 .. $#order_by )
+    );
+}
+
+
+
 $collection->RedoSearch();
  
 if ($page > 1 && ! @{$collection->ItemsArrayRef||[]}) {
-    RT::Interface::Web::Redirect( RT->Config->Get('WebURL')."/m/tickets/search?page=".($page-1)."&query=".$query);
+    RT::Interface::Web::Redirect( RT->Config->Get('WebURL')."/m/tickets/search?page=".($page-1)."&query=".$query."&order=$order&order_by=$order_by");
 }
 
 </%init>
@@ -37,11 +51,11 @@ loc("Found [quant,_1,ticket]",$collection->Count) &>
 </ul>
 <div id="paging">
 % if ($page > 1) { 
-<a href="<%RT->Config->Get('WebPath')%>/m/tickets/search?page=<%$page-1%>&query=<%$query%>">Back</a>
+<a href="<%RT->Config->Get('WebPath')%>/m/tickets/search?page=<%$page-1%>&query=<%$query%>&order=<%$order%>&order_by=<%$order_by%>">Back</a>
 % }
 Page <%$page%>
 
-<a href="<%RT->Config->Get('WebPath')%>/m/tickets/search?page=<%$page+1%>&query=<%$query%>">Next</a>
+<a href="<%RT->Config->Get('WebPath')%>/m/tickets/search?page=<%$page+1%>&query=<%$query%>&order=<%$order%>&order_by=<%$order_by%>">Next</a>
 </div>
 </&>
 </&>
