@@ -201,13 +201,12 @@ ul.menu form {
 }
 
 ul.menu form * {
-    width: 8em;
     display: inline;
 }
 
-ul.menu form input {
-    padding: 0;
-    margin: 0;
+
+ul.menu form input[type=text] { 
+    width: 7em;
 }
 
 ul.menu form input{ 
@@ -263,6 +262,18 @@ ul.menu form input{
     
 }
 
+#ticket-show .label, .login-body .label {
+    display: inline-block;
+    text-align: right;
+    width: 6em;
+    padding-right: 0.25em;
+    font-size: 0.8em;
+}
+
+.login-body .value {
+    width: auto;
+}
+
 .history ul.history-list {
     padding: 0;
     margin: 0;
@@ -291,6 +302,10 @@ div#login-box div.titlebox {
     width: 100%;
     margin-left:auto;
     margin-right: auto;
+}
+
+div#login-box input[type=text], div#login-box input[type=password] {
+    width: 100%;
 }
 
 #bpscredits img {
@@ -361,10 +376,10 @@ div.txn-content {
 }
 
 .label {
-    text-align: right;
+    text-align: left;
     width: 10em;
     color: #666;
-    display: inline-block;
+    display: block;
     padding-bottom: 0.2em;
     padding-right: 0.2em;
     
