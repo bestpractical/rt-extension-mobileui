@@ -224,7 +224,6 @@ my $print_value = sub {
   </div>
 % }
 
-% $m->callback( CallbackName => 'AfterCustomFields', Object => $Ticket );
 </&>
 % }
 
@@ -300,7 +299,8 @@ if ($size) {
 </&>
 
 % }
-% if ( RT->Config->Get('EnableReminders') ) {
+% # too painful to deal with reminders
+% if ( 0 &&  RT->Config->Get('EnableReminders') ) {
     <&|/Widgets/TitleBox, title => loc("Reminders"),
         class => 'ticket-info-reminders',
     &>
@@ -331,7 +331,7 @@ if ($size) {
     <div class="value date started"><% $Ticket->StartedObj->AsString %></div>
   </div>
  <div class="entry">
-    <div class="label date told"><a href="<% RT->Config->Get('WebPath') %>/Ticket/Display.html?id=<% $Ticket->id %>&Action=SetTold"><&|/l&>Last Contact</&></a>:</div>
+    <div class="label date told"><&|/l&>Last Contact</&>:</div>
     <div class="value date told"><% $Ticket->ToldObj->AsString %></div>
   </div>
  <div class="entry">
@@ -352,14 +352,13 @@ if ($size) {
 % my $UpdatedString = $Ticket->LastUpdated ? loc("[_1] by [_2]", $Ticket->LastUpdatedAsString, $Ticket->LastUpdatedByObj->Name) : loc("Never");
     <div class="value date updated"><% $UpdatedString | h %></div>
   </div>
-% $m->callback( %ARGS, CallbackName => 'EndOfList', TicketObj => $Ticket );
 
     </&>
 
     <&| /Widgets/TitleBox, title => loc('Links'), class => 'ticket-info-links' &>
 
  <div class="entry">
-    <div class="label"><% loc('Depends on')%></div>
+    <div class="label"><% loc('Depends on')%>:</div>
     <div class="value">
 
 <%PERL>
@@ -389,7 +388,7 @@ for my $link ( @{ $Ticket->DependsOn->ItemsArrayRef } ) {
     </div>
   </div>
  <div class="entry">
-    <div class="label"><% loc('Depended on by')%></div>
+    <div class="label"><% loc('Depended on by')%>:</div>
     <div class="value">
 <ul>
 % while (my $Link = $Ticket->DependedOnBy->Next) {
@@ -399,15 +398,15 @@ for my $link ( @{ $Ticket->DependsOn->ItemsArrayRef } ) {
     </div>
   </div>
  <div class="entry">
-    <div class="label"><% loc('Parents') %></div>
+    <div class="label"><% loc('Parents') %>:</div>
     <div class="value"><& /Ticket/Elements/ShowParents, Ticket => $Ticket &></div>
   </div>
  <div class="entry">
-    <div class="label"><% loc('Children')%></div>
+    <div class="label"><% loc('Children')%>:</div>
     <div class="value"><& /Ticket/Elements/ShowMembers, Ticket => $Ticket &></div>
   </div>
  <div class="entry">
-    <div class="label"><% loc('Refers to')%></div>
+    <div class="label"><% loc('Refers to')%>:</div>
     <div class="value">
 <ul>
 % while (my $Link = $Ticket->RefersTo->Next) {
@@ -417,7 +416,7 @@ for my $link ( @{ $Ticket->DependsOn->ItemsArrayRef } ) {
     </div>
   </div>
  <div class="entry">
-    <div class="label"><% loc('Referred to by')%></div>
+    <div class="label"><% loc('Referred to by')%>:</div>
     <div class="value">
     <ul>
 % while (my $Link = $Ticket->ReferredToBy->Next) {
