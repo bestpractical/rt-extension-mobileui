@@ -1,0 +1,25 @@
+NAME
+    RT::Extension::MobileUI - A phone friendly web interface for RT
+
+DESCRIPTION
+    This RT extension adds a mobile interface for RT.
+
+INSTALLATION
+        # perl Makefile.PL
+        # make
+        # make install
+
+        Add RT::Extension::MobileUI to your /opt/rt3/etc/RT_SiteConfig.pm file
+        Set(@Plugins, qw(RT::Extension::MobileUI));
+
+        If you have more than one Plugin enabled, you must enable them as one 
+        Set(@Plugins, qw(Foo Bar)); command
+
+        # restart apache
+
+AUTHOR
+    Jesse Vincent <jesse@bestpractical.com>
+
+LICENSE
+    GPL version 2.
+
