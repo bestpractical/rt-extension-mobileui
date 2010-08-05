@@ -139,7 +139,6 @@ ul.ticketlist li.ticket a.ticket{
     padding: 0.5em;
     padding-bottom: 5em;
     margin-bottom: -5em;
-    border: 1px solid blue;
 }
 ul.ticketlist li.ticket div.metadata {
 }
