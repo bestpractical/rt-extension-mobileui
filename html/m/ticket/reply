@@ -23,13 +23,13 @@
     Default      => $ARGS{'Owner'}
 &>
 </div></div>
-<div class="entry"><span class="label"><&|/l&>Worked</&>:</span><div class="value">
+<div class="entry timefield"><span class="label"><&|/l&>Worked</&>:</span><span class="value">
 <& /Elements/EditTimeValue,
     Name => 'UpdateTimeWorked',
     Default => $ARGS{UpdateTimeWorked}||'',
     InUnits => $ARGS{'UpdateTimeWorked-TimeUnits'}||'minutes',
 &>
-</div></div>
+</span></div>
 <input type="hidden" class="hidden" name="id" value="<%$t->Id%>" /><br />
 <div class="entry"><span class="label"><&|/l&>Update Type</&>:</span>
 <div class="value"><select name="UpdateType">
@@ -45,9 +45,9 @@
 % $m->callback( %ARGS, CallbackName => 'AfterSubject' );
 </div></div>
 
-<div class="entry"><span class="label"><&|/l&>One-time Cc</&>:</span><div><& /Elements/EmailInput, Name => 'UpdateCc', Size => '60', Default => $ARGS{UpdateCc} &></div></div>
+<div class="entry"><span class="label"><&|/l&>One-time Cc</&>:</span><span class="value"><& /Elements/EmailInput, Name => 'UpdateCc', Size => '60', Default => $ARGS{UpdateCc} &></span></div>
 
-<div class="entry"><span class="label"><&|/l&>One-time Bcc</&>:</span><div><& /Elements/EmailInput, Name => 'UpdateBcc', Size => '60', Default => $ARGS{UpdateBcc} &></div></div>
+<div class="entry"><span class="label"><&|/l&>One-time Bcc</&>:</span><span class="value"><& /Elements/EmailInput, Name => 'UpdateBcc', Size => '60', Default => $ARGS{UpdateBcc} &></span></div>
 
 <div class="entry"><span class="label" ><&|/l&>Message</&>:</span><div class="value">
 % if (exists $ARGS{UpdateContent}) {

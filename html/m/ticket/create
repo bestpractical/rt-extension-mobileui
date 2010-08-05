@@ -205,7 +205,7 @@ if ((!exists $ARGS{'AddMoreAttach'}) and (defined($ARGS{'id'}) and $ARGS{'id'} e
 </%init>
 <&| /m/_elements/wrapper, title => $title &>
 <& /Elements/ListActions, actions => \@results  &>
-<form action="<% RT->Config->Get('WebPath') %>/m/ticket/create" method="post" enctype="multipart/form-data" name="TicketCreate">
+<form action="<% RT->Config->Get('WebPath') %>/m/ticket/create" method="post" enctype="multipart/form-data" name="TicketCreate" id="ticket-create">
 <input type="hidden" class="hidden" name="id" value="new" />
 % $m->callback( CallbackName => 'FormStart', QueueObj => $QueueObj, ARGSRef => \%ARGS );
 % if ($gnupg_widget) {
@@ -218,20 +218,14 @@ if ((!exists $ARGS{'AddMoreAttach'}) and (defined($ARGS{'id'}) and $ARGS{'id'} e
 
 <%perl>
 $showrows->(
-    loc("Subject") => '<input name="Subject" size="30" maxsize="200" value="'.($ARGS{Subject} || '').'" />',
-    loc("Describe the issue below") =>
-        $m->scomp(
-        "/Elements/MessageBox", exists $ARGS{Content}  ? (Default => $ARGS{Content}, IncludeSignature => 0 ) : 
-( QuoteTransaction => $QuoteTransaction ),
-    Height => 5
-
-
-));
-
-
-$m->comp("/Elements/Submit", Label => loc("Create"));
-
+    loc("Subject") => '<input name="Subject" size="30" maxsize="200" value="'.($ARGS{Subject} || '').'" />');
 </%perl>
+    <span class="content-label label"><%loc("Describe the issue below")%></span>
+        <& /Elements/MessageBox, exists $ARGS{Content}  ? (Default => $ARGS{Content}, IncludeSignature => 0 ) : ( QuoteTransaction => $QuoteTransaction ), Height => 5  &>
+
+
+<&/Elements/Submit, Label => loc("Create") &>
+
 
 </&>
 </div>
