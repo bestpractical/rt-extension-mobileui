@@ -3,7 +3,7 @@ use strict;
 
 package RT::Extension::MobileUI;
 
-our $VERSION = 1;
+our $VERSION = 0.9;
 
 sub MobileClient {
     my $self = shift;
