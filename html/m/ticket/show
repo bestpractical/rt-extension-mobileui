@@ -171,19 +171,19 @@ my $print_value = sub {
 % if ($Ticket->TimeEstimated) {
  <div class="entry">
     <div class="label time estimated"><&|/l&>Estimated</&>:</div>
-    <div class="value time estimated"><& ShowTime, minutes => $Ticket->TimeEstimated &></div>
+    <div class="value time estimated"><& /Ticket/Elements/ShowTime, minutes => $Ticket->TimeEstimated &></div>
   </div>
 % }
 % if ($Ticket->TimeWorked) {
  <div class="entry">
     <div class="label time worked"><&|/l&>Worked</&>:</div>
-    <div class="value time worked"><& ShowTime, minutes => $Ticket->TimeWorked &></div>
+    <div class="value time worked"><& /Ticket/Elements/ShowTime, minutes => $Ticket->TimeWorked &></div>
   </div>
 % }
 % if ($Ticket->TimeLeft) {
  <div class="entry">
     <div class="label time left"><&|/l&>Left</&>:</div>
-    <div class="value time left"><& ShowTime, minutes => $Ticket->TimeLeft &></div>
+    <div class="value time left"><& /Ticket/Elements/ShowTime, minutes => $Ticket->TimeLeft &></div>
   </div>
 % }
  <div class="entry">
