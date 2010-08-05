@@ -24,14 +24,17 @@ my @menu = (
     {   label => loc("New ticket"),
         url   => '/m/ticket/select_create_queue',
     },
-    {   label => loc("My tickets"),
-        url   => '/m/tickets/owned'
+    {   label => loc("Bookmarked tickets"),
+        url   => '/m/tickets/search?name=Bookmarked%20Tickets',
     },
-    {   label => loc("My requests"),
-        url   => '/m/tickets/requested'
+    {   label => loc("Tickets I own"),
+        url   => '/m/tickets/search?name=My%20Tickets',
+    },
+    {   label => loc("Unowned tickets"),
+        url   => '/m/tickets/search?name=Unowned%20Tickets',
     },
     {   label => loc("All tickets"),
-        url   => '/m/tickets/all'
+        url   => '/m/tickets/search?query=id!%3d0&order_by=id&order=DESC'
     },
 );
 

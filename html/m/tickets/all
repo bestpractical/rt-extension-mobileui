@@ -1,4 +1,0 @@
-<%init>
- $m->comp('../_elements/ticket_list', %ARGS, query => 'id > 0' );
-$m->abort();
-</%init>
