@@ -1,6 +1,4 @@
-%# %$HTML::Mason::Commands::r->status(404);
-%# fix this sometime
-<&| _elements/wrapper &>
-<h1><%loc("Page not found")%></h1>
-<& _elements/menu &>
-</&>
+<%init>
+RT::Interface::Web::Redirect(RT->Config->Get('WebURL')."/m/");
+$m->abort();
+</%init>
