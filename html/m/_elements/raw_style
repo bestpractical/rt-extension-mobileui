@@ -5,7 +5,7 @@ body {
 }
 
 h1 { 
-    font-size: 1.5em;
+    font-size: 1.2em;
     padding-top: 0.5em;
     padding-left: 0.2em;
     display: block; 
@@ -20,7 +20,7 @@ div.buttons {
 }
 
 .titlebox-title {
-    font-size: 1.3em;
+    font-size: 1.1em;
     margin-left: 0.5em;
     margin-top: -1.2em;
     top: -0.5em;
@@ -87,11 +87,11 @@ div.titlebox, #bpscredits, .ticket_menu{
     background-color: #fff;
     padding-top: 1em;
     padding-bottom: 0.8em;
-    margin-top: 1.5em;
+    margin-top: 1.25em;
     -webkit-box-shadow: #333 0px 0px 5px;
     -moz-box-shadow: #333 0px 0px 5px;
     box-shadow: #333 0px 0px 5px;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 div .titlebox-content {
@@ -119,7 +119,7 @@ ul.ticketlist {
     margin-left: -0.5em;
     margin-right: -0.5em;
     padding: 0em;
-    padding-bottom: 2em;
+    padding-bottom: 1em;
 }
 
 ul.ticketlist li.ticket {
@@ -134,7 +134,7 @@ ul.ticketlist li.ticket:first-child {
 
 ul.ticketlist li.ticket a.ticket{
     display: inline-block;
-    font-size: 1.3em;
+    font-size: 1em;
     width: 100%;
     padding: 0.5em;
     padding-bottom: 5em;
@@ -146,17 +146,14 @@ ul.ticketlist li.ticket div.metadata {
 
 ul.ticketlist li.ticket div.metadata div {
     padding: 0.2em;
-}
-
-
-ul.ticketlist li.ticket div.metadata div {
+    font-size:0.8em;
     display: block;
 }
 
 ul.ticketlist li.ticket div.metadata .label {
     display: inline-block;
     width: 6em;
-    font-size: 1em;
+    font-size: 0.8em;
     text-align: right;
     color: #666;
 }
@@ -165,7 +162,7 @@ div#paging {
     text-align: center;
 }
 
-.titlebox.search .titlebox-title, .titlebox.menu .titlebox-title, .ticket_menu .titlebox-title, .history .titlebox-title, #ticket-create-basics .titlebox-title{
+.ticket-reply .titlebox-title, .titlebox.search .titlebox-title, .titlebox.menu .titlebox-title, .ticket_menu .titlebox-title, .history .titlebox-title, #ticket-create-basics .titlebox-title{
     display: none;
 }
 
@@ -233,7 +230,7 @@ ul.menu form input{
     text-align: center;
     padding-bottom: 0.25em;
     padding-top: 0.25em;
-    font-size: 1.5em;
+    font-size: 1em;
     width: 28%;
     padding-right: 0.3em;
     padding-left: 0.2em;
@@ -359,7 +356,8 @@ form {
 }
 
 #gohome a {
-    font-size: 1.2em;
+    font-size: 1em;
+    padding: 0.25em;
     color: #000;
 }
 
@@ -386,13 +384,14 @@ div.txn-content {
 }
 
 div.entry, tr.input-row {
-    margin-bottom: 1em;
+    margin-bottom: 0.25em;
     padding-bottom: 0.25em;
     border-bottom: 1px solid #ccc;
     display: block;
     width: 100%;
-    min-height: 2em;
+    min-height: 1em;
 }
+
 
 input, input[type=text], input[type=password], select {
     width: 100%;

@@ -1,8 +1,8 @@
-<&|/m/_elements/wrapper &>
+<&|/m/_elements/wrapper, title => loc('Update ticket #[_1]', $t->id) &>
 <& /m/_elements/ticket_menu, ticket => $t &>
 <& /Elements/ListActions, actions => \@results &>
-
-<&|/Widgets/TitleBox, title => loc('Update ticket #[_1]', $t->id)&>
+<div class="ticket-reply">
+<&|/Widgets/TitleBox &>
 <form action="reply" id="update"
     method="post" enctype="multipart/form-data">
 <input type="hidden" class="hidden" name="DefaultStatus" value="<% $DefaultStatus ||''%>" />
@@ -65,6 +65,7 @@
 <& /Elements/Submit, Label => loc('Update Ticket'), Name => 'SubmitTicket' &>
 </form>
 </&>
+</div>
 </&>
 <%INIT>
 my $CanRespond = 0;
