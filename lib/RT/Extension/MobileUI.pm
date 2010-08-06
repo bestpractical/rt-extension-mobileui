@@ -3,7 +3,7 @@ use strict;
 
 package RT::Extension::MobileUI;
 
-our $VERSION = "0.92";
+our $VERSION = "0.93";
 
 
 =head1 NAME

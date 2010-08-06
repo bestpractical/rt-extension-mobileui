@@ -1,3 +1,7 @@
+0.93
+
+* Avoid redirect loops with /m/ and dhandler
+
 0.92
 
 * an attempt at a fix for the homepage title
