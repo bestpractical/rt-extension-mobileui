@@ -1,5 +1,4 @@
-<&| _elements/wrapper &>
-<h1><%loc("RT for [_1]",RT->Config->Get('rtname'))%></h1>
+<&| _elements/wrapper, title => loc("RT for [_1]",RT->Config->Get('rtname'))&>
 <& _elements/menu &>
 <& _elements/full_site_link &>
 </&>
