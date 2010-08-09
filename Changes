@@ -1,3 +1,7 @@
+0.95
+
+* Additional fixes for RT instances running at subpaths, rather than the root ofa server.
+
 0.94
 
 * Handle RT not located at / when redirecting from a ticket URL
