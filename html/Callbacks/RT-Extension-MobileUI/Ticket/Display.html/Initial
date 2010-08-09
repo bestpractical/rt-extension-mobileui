@@ -1,7 +1,7 @@
 <%INIT>
 return if $ARGSRef->{'NoRedirect'};
 if (RT::Extension::MobileUI::MobileClient()) {
-    RT::Interface::Web::Redirect('/m/ticket/show.html?id='.$TicketObj->id);
+    RT::Interface::Web::Redirect(RT->Config->Get('WebBaseURL').'/m/ticket/show.html?id='.$TicketObj->id);
     $m->abort;
 }
 </%INIT>
