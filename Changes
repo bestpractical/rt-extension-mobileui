@@ -1,3 +1,7 @@
+0.96
+
+* Added WebOS as a valid mobile user agent. Thanks to Jason Smith.
+
 0.95
 
 * Additional fixes for RT instances running at subpaths, rather than the root ofa server.
