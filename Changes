@@ -1,3 +1,7 @@
+0.97
+
+* Added S60 as a mobile user agent. Thanks to Kristian Rikvold-Jess.
+
 0.96
 
 * Added WebOS as a valid mobile user agent. Thanks to Jason Smith.
