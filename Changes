@@ -1,3 +1,7 @@
+0.98
+
+* Fixed redirection from normal ticket display to mobile ticket display
+
 0.97
 
 * Added S60 as a mobile user agent. Thanks to Kristian Rikvold-Jess.
