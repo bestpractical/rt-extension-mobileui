@@ -5,6 +5,10 @@ $id => undef
 my $Ticket;
 my @Actions; 
 
+unless ($id) {
+    Abort('No ticket specified');
+}
+
 if ($ARGS{'id'} eq 'new') {
     # {{{ Create a new ticket
 
