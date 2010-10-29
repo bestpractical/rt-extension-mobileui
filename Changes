@@ -1,6 +1,9 @@
-0.98
+0.99
 
 * Fixed redirection from normal ticket display to mobile ticket display
+
+0.98 
+
 * Avoid a double slash after the $WebURL when redirecting to some mobile pages
 
 0.97
