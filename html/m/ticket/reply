@@ -166,6 +166,6 @@ if ( !$checks_failure && exists $ARGS{SubmitTicket} ) {
 
 <%ARGS>
 $id => undef
-$Action => 'reply'
+$Action => 'Respond'
 $DefaultStatus => undef
 </%ARGS>
