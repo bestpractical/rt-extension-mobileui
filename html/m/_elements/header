@@ -11,6 +11,7 @@ $r->headers_out->{'Cache-control'} = 'no-cache';
 <link rel="stylesheet" type="text/css" href="<%RT->Config->Get('WebPath')%>/m/style.css"/>
 <title><%$title%></title>
 <meta name="viewport" content="width=device-width height=device-height user-scalable=yes"/>
+<script type="text/javascript" src="<%RT->Config->Get('WebPath')%>/NoAuth/js/ahah.js"></script>
 </head>
 <body>
 % if ($show_home_button) {
