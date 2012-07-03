@@ -1,3 +1,8 @@
+1.02
+
+* Apply a number of XSS security fixes from 4.0-trunk, which resolve
+  CVE-2012-2769.
+
 1.01
 
 * Corrected the "Reply" link to default to reply rather than comment
