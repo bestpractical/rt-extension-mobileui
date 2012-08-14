@@ -1,3 +1,8 @@
+1.03
+
+* whitelist /m/tickets/search from RT's CSRF protection in case someone
+  bookmarks a search from their mobile device and wants to rerun it.
+
 1.02
 
 * Apply a number of XSS security fixes from 4.0-trunk, which resolve

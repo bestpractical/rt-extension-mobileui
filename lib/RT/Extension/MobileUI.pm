@@ -62,6 +62,13 @@ if (($ENV{'HTTP_USER_AGENT'} || '') =~ /(?:hiptop|Blazer|Novarra|Vagabond|SonyEr
 
 }
 
+# while /m/tickets/search could be used to run a denial-of-service
+# attack against RT by tricking your browser into running inefficient
+# searches, it's really useful to be able to bookmark search results
+# so we allow direct access to it.
+$RT::Interface::Web::is_whitelisted_component{'/m/tickets/search'} = 1;
+
+
 =head1 AUTHOR
 
 Jesse Vincent E<lt>jesse@bestpractical.comE<gt>
