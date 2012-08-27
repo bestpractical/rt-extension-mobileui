@@ -20,4 +20,4 @@ no_index:
     - inc
 resources:
   license: http://opensource.org/licenses/gpl-license.php
-version: 1.02
+version: 1.03
