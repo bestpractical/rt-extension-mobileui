@@ -44,6 +44,7 @@ This RT extension adds a mobile interface for RT.
     If you have more than one Plugin enabled, you must enable them as one 
     Set(@Plugins, qw(Foo Bar)); command
 
+    # clear mason cache
     # restart apache
 =cut
 
