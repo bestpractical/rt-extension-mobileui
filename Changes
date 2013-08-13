@@ -1,3 +1,12 @@
+1.05    Tue Aug 13 11:04:53 PDT 2013
+
+* Re-release 1.04 with a proper Changes section for 1.04
+
+1.04
+
+* Backport May 2013 security patches from 4.0 versions
+* Document that clearing the Mason cache is necessary
+
 1.03
 
 * whitelist /m/tickets/search from RT's CSRF protection in case someone
