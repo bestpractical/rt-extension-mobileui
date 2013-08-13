@@ -3,7 +3,7 @@ use strict;
 
 package RT::Extension::MobileUI;
 
-our $VERSION = "1.03";
+our $VERSION = "1.04";
 
 sub _encode_surrogates {
     my $uni = $_[0] - 0x10000;
@@ -44,6 +44,7 @@ This RT extension adds a mobile interface for RT.
     If you have more than one Plugin enabled, you must enable them as one 
     Set(@Plugins, qw(Foo Bar)); command
 
+    # clear mason cache
     # restart apache
 =cut
 

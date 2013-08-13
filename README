@@ -15,6 +15,7 @@ INSTALLATION
         If you have more than one Plugin enabled, you must enable them as one 
         Set(@Plugins, qw(Foo Bar)); command
 
+        # clear mason cache
         # restart apache
 
 AUTHOR
