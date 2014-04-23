@@ -3,7 +3,7 @@ use strict;
 
 package RT::Extension::MobileUI;
 
-our $VERSION = "1.05";
+our $VERSION = "1.06";
 
 sub _encode_surrogates {
     my $uni = $_[0] - 0x10000;
